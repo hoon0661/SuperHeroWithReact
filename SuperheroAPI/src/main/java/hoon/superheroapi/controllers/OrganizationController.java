@@ -9,7 +9,7 @@ import hoon.superheroapi.data.HeroDao;
 import hoon.superheroapi.data.LocationDao;
 import hoon.superheroapi.data.OrganizationDao;
 import hoon.superheroapi.data.SightingDao;
-import hoon.superheroapi.models.Location;
+import hoon.superheroapi.models.Organization;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,9 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @author hoon0
  */
 @RestController
-@RequestMapping("/api/location")
-public class LocationController {
-    
+@RequestMapping("/api/organization")
+public class OrganizationController {
     @Autowired
     HeroDao heroDao;
     
@@ -45,44 +44,45 @@ public class LocationController {
     SightingDao sightingDao;
     
     @GetMapping
-    public List<Location> getAllLocations(){
-        return locationDao.getAllLocations();
-    }
-    
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Location addLocation(@RequestBody Location location){
-        return locationDao.addLocation(location);
+    public List<Organization> getAllOrganizations(){
+        return organizationDao.getAllOrganizations();
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Location> getLocationById(@PathVariable int id){
-        Location result = locationDao.getLocationById(id);
+    public ResponseEntity<Organization> getOrganizationById(@PathVariable int id){
+        Organization result = organizationDao.getOrganizationById(id);
         if(result == null){
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(result);
     }
     
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Organization addOrganization(@RequestBody Organization organization){
+        return organizationDao.addOrganization(organization);
+    }
+    
     @PutMapping("/{id}")
-    public ResponseEntity updateLocation(@PathVariable int id, @RequestBody Location location){
+    public ResponseEntity updateOrganization(@PathVariable int id, @RequestBody Organization organization){
         ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
-        if(id != location.getId()){
+        if(id != organization.getId()){
             response = new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
-        } else {
-            locationDao.updateLocation(location);
+        } else{
+            organizationDao.updateOrganization(organization);
             response = new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         return response;
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteLocation(@PathVariable int id){
+    public ResponseEntity deleteOrganization(@PathVariable int id){
         ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
-        if(locationDao.getLocationById(id) != null){
-           locationDao.deleteLocationById(id);
+        if(organizationDao.getOrganizationById(id) != null){
+           organizationDao.deleteOrganizationById(id);
            return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         return response;
     }
 }
+    

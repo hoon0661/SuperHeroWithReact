@@ -9,7 +9,7 @@ import hoon.superheroapi.data.HeroDao;
 import hoon.superheroapi.data.LocationDao;
 import hoon.superheroapi.data.OrganizationDao;
 import hoon.superheroapi.data.SightingDao;
-import hoon.superheroapi.models.Location;
+import hoon.superheroapi.models.Sighting;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,11 +28,11 @@ import org.springframework.web.bind.annotation.RestController;
  *
  * @author hoon0
  */
+
 @RestController
-@RequestMapping("/api/location")
-public class LocationController {
-    
-    @Autowired
+@RequestMapping("/api/sighting")
+public class SightingController {
+     @Autowired
     HeroDao heroDao;
     
     @Autowired
@@ -45,43 +45,43 @@ public class LocationController {
     SightingDao sightingDao;
     
     @GetMapping
-    public List<Location> getAllLocations(){
-        return locationDao.getAllLocations();
-    }
-    
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Location addLocation(@RequestBody Location location){
-        return locationDao.addLocation(location);
+    public List<Sighting> getAllSightings(){
+        return sightingDao.getAllSightings();
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Location> getLocationById(@PathVariable int id){
-        Location result = locationDao.getLocationById(id);
+    public ResponseEntity<Sighting> getSightingById(@PathVariable int id){
+        Sighting result = sightingDao.getSightingById(id);
         if(result == null){
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(result);
     }
     
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Sighting addSighting(@RequestBody Sighting sighting){
+        return sightingDao.addSighting(sighting);
+    }
+    
     @PutMapping("/{id}")
-    public ResponseEntity updateLocation(@PathVariable int id, @RequestBody Location location){
+    public ResponseEntity updateSighting(@PathVariable int id, @RequestBody Sighting sighting){
         ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
-        if(id != location.getId()){
+        if(id != sighting.getId()){
             response = new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
         } else {
-            locationDao.updateLocation(location);
+            sightingDao.updateSighting(sighting);
             response = new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         return response;
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteLocation(@PathVariable int id){
+    public ResponseEntity deleteSighting(@PathVariable int id){
         ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
-        if(locationDao.getLocationById(id) != null){
-           locationDao.deleteLocationById(id);
-           return new ResponseEntity(HttpStatus.NO_CONTENT);
+        if(sightingDao.getSightingById(id) != null){
+            sightingDao.deleteSightingById(id);
+            response = new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         return response;
     }

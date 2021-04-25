@@ -12,7 +12,9 @@ hoon\superheroapi\models\Hero.class
 hoon\superheroapi\models\Location.class
 hoon\superheroapi\App.class
 hoon\superheroapi\data\HeroDaoDB.class
+hoon\superheroapi\controllers\OrganizationController.class
 hoon\superheroapi\data\LocationDaoDB$LocationMapper.class
 hoon\superheroapi\data\LocationDao.class
 hoon\superheroapi\data\SightingDao.class
+hoon\superheroapi\controllers\HeroController.class
 hoon\superheroapi\models\Sighting.class

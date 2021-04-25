@@ -9,7 +9,7 @@ import hoon.superheroapi.data.HeroDao;
 import hoon.superheroapi.data.LocationDao;
 import hoon.superheroapi.data.OrganizationDao;
 import hoon.superheroapi.data.SightingDao;
-import hoon.superheroapi.models.Location;
+import hoon.superheroapi.models.Hero;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,9 +29,8 @@ import org.springframework.web.bind.annotation.RestController;
  * @author hoon0
  */
 @RestController
-@RequestMapping("/api/location")
-public class LocationController {
-    
+@RequestMapping("/api/hero")
+public class HeroController {
     @Autowired
     HeroDao heroDao;
     
@@ -45,43 +44,43 @@ public class LocationController {
     SightingDao sightingDao;
     
     @GetMapping
-    public List<Location> getAllLocations(){
-        return locationDao.getAllLocations();
-    }
-    
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    public Location addLocation(@RequestBody Location location){
-        return locationDao.addLocation(location);
+    public List<Hero> getAllHeroes(){
+        return heroDao.getAllHeroes();
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<Location> getLocationById(@PathVariable int id){
-        Location result = locationDao.getLocationById(id);
+    public ResponseEntity<Hero> getHeroById(@PathVariable int id){
+        Hero result = heroDao.getHeroById(id);
         if(result == null){
             return new ResponseEntity(null, HttpStatus.NOT_FOUND);
         }
         return ResponseEntity.ok(result);
     }
     
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public Hero addHero(@RequestBody Hero hero){
+        return heroDao.addHero(hero);
+    }
+    
     @PutMapping("/{id}")
-    public ResponseEntity updateLocation(@PathVariable int id, @RequestBody Location location){
+    public ResponseEntity updateHero(@PathVariable int id, @RequestBody Hero hero){
         ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
-        if(id != location.getId()){
+        if(id != hero.getId()){
             response = new ResponseEntity(HttpStatus.UNPROCESSABLE_ENTITY);
         } else {
-            locationDao.updateLocation(location);
+            heroDao.updateHero(hero);
             response = new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         return response;
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteLocation(@PathVariable int id){
+    public ResponseEntity deleteHero(@PathVariable int id){
         ResponseEntity response = new ResponseEntity(HttpStatus.NOT_FOUND);
-        if(locationDao.getLocationById(id) != null){
-           locationDao.deleteLocationById(id);
-           return new ResponseEntity(HttpStatus.NO_CONTENT);
+        if(heroDao.getHeroById(id) != null){
+            heroDao.deleteHeroById(id);
+            response = new ResponseEntity(HttpStatus.NO_CONTENT);
         }
         return response;
     }
