@@ -6,6 +6,7 @@ hoon\superheroapi\models\Organization.class
 hoon\superheroapi\data\OrganizationDao.class
 hoon\superheroapi\data\OrganizationDaoDB.class
 hoon\superheroapi\controllers\LocationController.class
+hoon\superheroapi\controllers\SightingController.class
 hoon\superheroapi\data\SightingDaoDB$SightingMapper.class
 hoon\superheroapi\data\LocationDaoDB.class
 hoon\superheroapi\models\Hero.class
