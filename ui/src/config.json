@@ -1,0 +1,6 @@
+{
+  "apiHero": "http://localhost:8080/api/hero",
+  "apiSighting": "http://localhost:8080/api/sighting",
+  "apiLocation": "http://localhost:8080/api/location",
+  "apiOrganization": "http://localhost:8080/api/organization"
+}

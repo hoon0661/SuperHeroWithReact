@@ -1,16 +1,61 @@
 import React, { Component } from "react";
-import axios from "axios";
+import { getLocations, deleteLocation } from "../services/locationService";
 
 class Locations extends Component {
   state = { locations: [] };
+
   async componentDidMount() {
-    const url = "http://localhost:8080/api/location";
-    const response = await fetch(url);
-    const data = await response.json();
-    console.log(data);
+    const { data: locations } = await getLocations();
+    this.setState({ locations });
   }
+
+  handleDelete = async (location) => {
+    const originalLocations = this.state.locations;
+    const locations = originalLocations.filter(
+      (item) => item.id !== location.id
+    );
+    this.setState({ locations });
+    try {
+      await deleteLocation(location.id);
+    } catch {
+      this.setState({ locations: originalLocations });
+    }
+  };
+
   render() {
-    return <h1>Hello</h1>;
+    return (
+      <table className="table">
+        <thead>
+          <tr>
+            <th>ID</th>
+            <th>City</th>
+            <th>Latitude</th>
+            <th>Longitude</th>
+            <th>Description</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          {this.state.locations.map((location) => (
+            <tr key={location.id}>
+              <td>{location.id}</td>
+              <td>{location.city}</td>
+              <td>{location.latitude}</td>
+              <td>{location.longitude}</td>
+              <td>{location.description}</td>
+              <td>
+                <button
+                  onClick={() => this.handleDelete(location)}
+                  className="btn btn-danger btn-sm"
+                >
+                  Delete
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    );
   }
 }
 
