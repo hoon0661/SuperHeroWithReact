@@ -1,34 +1,37 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { getLocations, deleteLocation } from "../services/locationService";
+import {
+  getOrganizations,
+  deleteOrganization,
+} from "../services/organizationService";
 import Pagination from "./common/pagination";
-import LocationsTable from "./locationsTable";
+import OrganizationsTable from "./organizationsTable";
 import { paginate } from "../utils/paginate";
 import _ from "lodash";
 
-class Locations extends Component {
+class Organizations extends Component {
   state = {
-    locations: [],
+    organizations: [],
     pageSize: 4,
     currentPage: 1,
     sortColumn: { selectedColumn: "id", order: "asc" },
   };
 
   async componentDidMount() {
-    const { data: locations } = await getLocations();
-    this.setState({ locations });
+    const { data: organizations } = await getOrganizations();
+    this.setState({ organizations });
   }
 
-  handleDelete = async (location) => {
-    const originalLocations = this.state.locations;
-    const locations = originalLocations.filter(
-      (item) => item.id !== location.id
+  handleDelete = async (organization) => {
+    const originalOrganizations = this.state.organizations;
+    const organizations = originalOrganizations.filter(
+      (item) => item.id !== organizations.id
     );
-    this.setState({ locations });
+    this.setState({ organizations });
     try {
-      await deleteLocation(location.id);
+      await deleteOrganization(organization.id);
     } catch {
-      this.setState({ locations: originalLocations });
+      this.setState({ organizations: originalOrganizations });
     }
   };
 
@@ -44,39 +47,39 @@ class Locations extends Component {
     const {
       pageSize,
       currentPage,
-      locations: allLocations,
+      organizations: allOrganizations,
       sortColumn,
     } = this.state;
 
     const sorted = _.orderBy(
-      allLocations,
+      allOrganizations,
       [sortColumn.selectedColumn],
       [sortColumn.order]
     );
 
-    const locations = paginate(sorted, currentPage, pageSize);
+    const organizations = paginate(sorted, currentPage, pageSize);
 
-    return { data: locations };
+    return { data: organizations };
   };
 
   render() {
-    const { length: count } = this.state.locations;
+    const { length: count } = this.state.organizations;
     const { pageSize, currentPage, sortColumn } = this.state;
 
     if (count === 0) {
-      return <p>There are no location in the database.</p>;
+      return <p>There are no organization in the database.</p>;
     }
 
-    const { data: locations } = this.getPagedData();
+    const { data: organizations } = this.getPagedData();
 
     return (
       <React.Fragment>
-        <Link to="/locations/new" className="btn btn-success">
+        <Link to="/organizations/new" className="btn btn-success">
           New
         </Link>
-        <p>Showing {count} locations in the database.</p>
-        <LocationsTable
-          locations={locations}
+        <p>Showing {count} organizations in the database.</p>
+        <OrganizationsTable
+          organizations={organizations}
           sortColumn={sortColumn}
           onDelete={this.handleDelete}
           onSort={this.handleSort}
@@ -92,4 +95,4 @@ class Locations extends Component {
   }
 }
 
-export default Locations;
+export default Organizations;

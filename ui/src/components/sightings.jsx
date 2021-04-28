@@ -1,34 +1,34 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { getLocations, deleteLocation } from "../services/locationService";
+import { getSightings, deleteSighting } from "../services/sightingService";
 import Pagination from "./common/pagination";
-import LocationsTable from "./locationsTable";
+import SightingsTable from "./sightingsTable";
 import { paginate } from "../utils/paginate";
 import _ from "lodash";
 
-class Locations extends Component {
+class Sightings extends Component {
   state = {
-    locations: [],
+    sightings: [],
     pageSize: 4,
     currentPage: 1,
     sortColumn: { selectedColumn: "id", order: "asc" },
   };
 
   async componentDidMount() {
-    const { data: locations } = await getLocations();
-    this.setState({ locations });
+    const { data: sightings } = await getSightings();
+    this.setState({ sightings });
   }
 
-  handleDelete = async (location) => {
-    const originalLocations = this.state.locations;
-    const locations = originalLocations.filter(
-      (item) => item.id !== location.id
+  handleDelete = async (sighting) => {
+    const originalSightings = this.state.sightings;
+    const sightings = originalSightings.filter(
+      (item) => item.id !== sightings.id
     );
-    this.setState({ locations });
+    this.setState({ sightings });
     try {
-      await deleteLocation(location.id);
+      await deleteSighting(sighting.id);
     } catch {
-      this.setState({ locations: originalLocations });
+      this.setState({ sightings: originalSightings });
     }
   };
 
@@ -44,39 +44,39 @@ class Locations extends Component {
     const {
       pageSize,
       currentPage,
-      locations: allLocations,
+      sightings: allSightings,
       sortColumn,
     } = this.state;
 
     const sorted = _.orderBy(
-      allLocations,
+      allSightings,
       [sortColumn.selectedColumn],
       [sortColumn.order]
     );
 
-    const locations = paginate(sorted, currentPage, pageSize);
+    const sightings = paginate(sorted, currentPage, pageSize);
 
-    return { data: locations };
+    return { data: sightings };
   };
 
   render() {
-    const { length: count } = this.state.locations;
+    const { length: count } = this.state.sightings;
     const { pageSize, currentPage, sortColumn } = this.state;
 
     if (count === 0) {
-      return <p>There are no location in the database.</p>;
+      return <p>There are no sighting in the database.</p>;
     }
 
-    const { data: locations } = this.getPagedData();
+    const { data: sightings } = this.getPagedData();
 
     return (
       <React.Fragment>
-        <Link to="/locations/new" className="btn btn-success">
+        <Link to="/sightings/new" className="btn btn-success">
           New
         </Link>
-        <p>Showing {count} locations in the database.</p>
-        <LocationsTable
-          locations={locations}
+        <p>Showing {count} sightings in the database.</p>
+        <SightingsTable
+          sightings={sightings}
           sortColumn={sortColumn}
           onDelete={this.handleDelete}
           onSort={this.handleSort}
@@ -92,4 +92,4 @@ class Locations extends Component {
   }
 }
 
-export default Locations;
+export default Sightings;
