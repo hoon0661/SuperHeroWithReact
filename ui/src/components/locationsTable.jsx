@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Table from "./common/table";
+import { Link } from "react-router-dom";
 
 class LocationsTable extends Component {
   columns = [
@@ -8,6 +9,17 @@ class LocationsTable extends Component {
     { path: "latitude", label: "Latitude" },
     { path: "longitude", label: "Longitude" },
     { path: "description", label: "Description" },
+    {
+      key: "detail",
+      content: (location) => (
+        <Link
+          to={`/locations/${location.id}`}
+          className="btn btn-success btn-sm"
+        >
+          Detail
+        </Link>
+      ),
+    },
     {
       key: "delete",
       content: (location) => (

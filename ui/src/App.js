@@ -6,6 +6,8 @@ import Locations from "./components/locations";
 import Organizations from "./components/organizations";
 import Heroes from "./components/heroes";
 import Sightings from "./components/sightings";
+import HeroDetail from "./components/heroDetail";
+import LocationDetail from "./components/locationDetail";
 import "./App.css";
 
 class App extends Component {
@@ -18,6 +20,8 @@ class App extends Component {
         <Navbar />
         <main className="container">
           <Switch>
+            <Route path="/locations/:id" component={LocationDetail} />
+            <Route path="/heroes/:id" component={HeroDetail} />
             <Route path="/sightings" component={Sightings} />
             <Route path="/heroes" component={Heroes} />
             <Route path="/locations" component={Locations} />

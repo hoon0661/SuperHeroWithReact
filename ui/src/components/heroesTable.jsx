@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Table from "./common/table";
+import { Link } from "react-router-dom";
 
 class HeroesTable extends Component {
   columns = [
@@ -7,6 +8,14 @@ class HeroesTable extends Component {
     { path: "name", label: "Name" },
     { path: "superPower", label: "Super Power" },
     { path: "heroType", label: "Hero Type" },
+    {
+      key: "detail",
+      content: (hero) => (
+        <Link to={`/heroes/${hero.id}`} className="btn btn-success btn-sm">
+          Detail
+        </Link>
+      ),
+    },
     {
       key: "delete",
       content: (hero) => (

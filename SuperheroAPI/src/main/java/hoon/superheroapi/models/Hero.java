@@ -5,11 +5,10 @@
  */
 package hoon.superheroapi.models;
 
-import java.net.URL;
+
 import java.util.List;
 import java.util.Objects;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 /**
