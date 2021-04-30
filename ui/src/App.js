@@ -8,6 +8,7 @@ import Heroes from "./components/heroes";
 import Sightings from "./components/sightings";
 import HeroDetail from "./components/heroDetail";
 import LocationDetail from "./components/locationDetail";
+import LoginForm from "./components/common/loginForm";
 import "./App.css";
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
         <Navbar />
         <main className="container">
           <Switch>
+            <Route path="/login" component={LoginForm} />
             <Route path="/locations/:id" component={LocationDetail} />
             <Route path="/heroes/:id" component={HeroDetail} />
             <Route path="/sightings" component={Sightings} />
