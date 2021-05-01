@@ -8,7 +8,7 @@ import Heroes from "./components/heroes";
 import Sightings from "./components/sightings";
 import HeroDetail from "./components/heroDetail";
 import LocationDetail from "./components/locationDetail";
-import LoginForm from "./components/common/loginForm";
+import LoginForm from "./components/loginForm";
 import "./App.css";
 
 class App extends Component {
