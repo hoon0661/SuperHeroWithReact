@@ -7,8 +7,10 @@ import Organizations from "./components/organizations";
 import Heroes from "./components/heroes";
 import Sightings from "./components/sightings";
 import HeroDetail from "./components/heroDetail";
-import LocationDetail from "./components/locationDetail";
+// import LocationDetail from "./components/locationDetail";
 import LoginForm from "./components/loginForm";
+import LocationForm from "./components/locationForm";
+import RegisterForm from "./components/registerForm";
 import "./App.css";
 
 class App extends Component {
@@ -21,8 +23,9 @@ class App extends Component {
         <Navbar />
         <main className="container">
           <Switch>
+            <Route path="/register" component={RegisterForm} />
             <Route path="/login" component={LoginForm} />
-            <Route path="/locations/:id" component={LocationDetail} />
+            <Route path="/locations/:id" component={LocationForm} />
             <Route path="/heroes/:id" component={HeroDetail} />
             <Route path="/sightings" component={Sightings} />
             <Route path="/heroes" component={Heroes} />

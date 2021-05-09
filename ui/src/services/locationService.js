@@ -14,3 +14,13 @@ export function getLocationById(locationId) {
 export function deleteLocation(locationId) {
   http.delete(apiEndPoint + "/" + locationId);
 }
+
+export function saveLocation(location) {
+  if (location.id) {
+    const body = { ...location };
+    delete body.id;
+    return http.put(apiEndPoint + "/" + location.id, body);
+  }
+
+  return http.post(apiEndPoint, location);
+}

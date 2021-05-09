@@ -69,7 +69,7 @@ public class HeroDaoDB implements HeroDao{
     public Hero addHero(Hero hero) {
         final String INSERT_HERO = "INSERT INTO hero(name, description, superPower, heroType, imgUrl) "
                 + "VALUES(?,?,?,?,?)";
-        jdbc.update(INSERT_HERO, hero.getName(), hero.getDescription(), hero.getSuperPower(), hero.getHeroType(), hero.getImgUrl());
+        jdbc.update(INSERT_HERO, hero.getName(), hero.getDescription(), hero.getSuperpower(), hero.getHerotype(), hero.getImgurl());
         
         int newId = jdbc.queryForObject("SELECT LAST_INSERT_ID()", Integer.class);
         hero.setId(newId);
@@ -101,7 +101,7 @@ public class HeroDaoDB implements HeroDao{
                 + "heroType = ?, "
                 + "imgUrl = ? "
                 + "WHERE id = ?";
-        jdbc.update(UPDATE_HERO, hero.getName(), hero.getDescription(), hero.getSuperPower(), hero.getHeroType(), hero.getImgUrl(), hero.getId());
+        jdbc.update(UPDATE_HERO, hero.getName(), hero.getDescription(), hero.getSuperpower(), hero.getHerotype(), hero.getImgurl(), hero.getId());
         
         final String DELETE_HERO_ORGANIZATION = "DELETE FROM hero_organization WHERE heroId = ?";
         jdbc.update(DELETE_HERO_ORGANIZATION, hero.getId());
@@ -162,9 +162,9 @@ public class HeroDaoDB implements HeroDao{
             hero.setId(rs.getInt("id"));
             hero.setName(rs.getString("name"));
             hero.setDescription(rs.getString("description"));
-            hero.setSuperPower(rs.getString("superPower"));
-            hero.setHeroType(rs.getString("heroType"));
-            hero.setImgUrl(rs.getString("imgUrl"));
+            hero.setSuperpower(rs.getString("superPower"));
+            hero.setHerotype(rs.getString("heroType"));
+            hero.setImgurl(rs.getString("imgUrl"));
 
             return hero;
         }

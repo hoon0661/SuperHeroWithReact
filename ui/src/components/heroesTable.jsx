@@ -6,8 +6,8 @@ class HeroesTable extends Component {
   columns = [
     { path: "id", label: "ID" },
     { path: "name", label: "Name" },
-    { path: "superPower", label: "Super Power" },
-    { path: "heroType", label: "Hero Type" },
+    { path: "superpower", label: "Super Power" },
+    { path: "herotype", label: "Hero Type" },
     {
       key: "detail",
       content: (hero) => (

@@ -1,4 +1,5 @@
 import React from "react";
+import LocationForm from "./locationForm";
 
 const LocationDetail = ({ match, history }) => {
   return (

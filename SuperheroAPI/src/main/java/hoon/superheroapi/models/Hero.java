@@ -28,14 +28,14 @@ public class Hero {
     
     @NotBlank(message = "Super power must not be empty.")
     @Size(max = 50, message = "Super power must be less than 50 characters.")
-    private String superPower;
+    private String superpower;
     
    
     @NotBlank(message = "Please choose hero type.")
-    private String heroType;
+    private String herotype;
     
     @NotBlank(message = "Please provide url for image")
-    private String imgUrl;
+    private String imgurl;
     private List<Organization> organizations;
 //    private List<Sighting> sightings; 
 
@@ -63,20 +63,28 @@ public class Hero {
         this.description = description;
     }
 
-    public String getSuperPower() {
-        return superPower;
+    public String getSuperpower() {
+        return superpower;
     }
 
-    public void setSuperPower(String superPower) {
-        this.superPower = superPower;
+    public void setSuperpower(String superpower) {
+        this.superpower = superpower;
     }
 
-    public String getHeroType() {
-        return heroType;
+    public String getHerotype() {
+        return herotype;
     }
 
-    public void setHeroType(String heroType) {
-        this.heroType = heroType;
+    public void setHerotype(String herotype) {
+        this.herotype = herotype;
+    }
+
+    public String getImgurl() {
+        return imgurl;
+    }
+
+    public void setImgurl(String imgurl) {
+        this.imgurl = imgurl;
     }
 
     public List<Organization> getOrganizations() {
@@ -87,29 +95,16 @@ public class Hero {
         this.organizations = organizations;
     }
 
-    public String getImgUrl() {
-        return imgUrl;
-    }
-
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
-    }
-
-    @Override
-    public String toString() {
-        return "Hero{" + "id=" + id + ", name=" + name + ", description=" + description + ", superPower=" + superPower + ", heroType=" + heroType + ", imgUrl=" + imgUrl + ", organizations=" + organizations + '}';
-    }
-
     @Override
     public int hashCode() {
         int hash = 5;
-        hash = 53 * hash + this.id;
-        hash = 53 * hash + Objects.hashCode(this.name);
-        hash = 53 * hash + Objects.hashCode(this.description);
-        hash = 53 * hash + Objects.hashCode(this.superPower);
-        hash = 53 * hash + Objects.hashCode(this.heroType);
-        hash = 53 * hash + Objects.hashCode(this.imgUrl);
-        hash = 53 * hash + Objects.hashCode(this.organizations);
+        hash = 59 * hash + this.id;
+        hash = 59 * hash + Objects.hashCode(this.name);
+        hash = 59 * hash + Objects.hashCode(this.description);
+        hash = 59 * hash + Objects.hashCode(this.superpower);
+        hash = 59 * hash + Objects.hashCode(this.herotype);
+        hash = 59 * hash + Objects.hashCode(this.imgurl);
+        hash = 59 * hash + Objects.hashCode(this.organizations);
         return hash;
     }
 
@@ -134,13 +129,13 @@ public class Hero {
         if (!Objects.equals(this.description, other.description)) {
             return false;
         }
-        if (!Objects.equals(this.superPower, other.superPower)) {
+        if (!Objects.equals(this.superpower, other.superpower)) {
             return false;
         }
-        if (!Objects.equals(this.heroType, other.heroType)) {
+        if (!Objects.equals(this.herotype, other.herotype)) {
             return false;
         }
-        if (!Objects.equals(this.imgUrl, other.imgUrl)) {
+        if (!Objects.equals(this.imgurl, other.imgurl)) {
             return false;
         }
         if (!Objects.equals(this.organizations, other.organizations)) {
@@ -148,7 +143,4 @@ public class Hero {
         }
         return true;
     }
-
-   
-    
 }
