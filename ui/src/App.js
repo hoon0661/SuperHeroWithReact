@@ -11,6 +11,7 @@ import HeroDetail from "./components/heroDetail";
 import LoginForm from "./components/loginForm";
 import LocationForm from "./components/locationForm";
 import RegisterForm from "./components/registerForm";
+import NotFound from "./components/notFound";
 import "./App.css";
 
 class App extends Component {
@@ -31,6 +32,8 @@ class App extends Component {
             <Route path="/heroes" component={Heroes} />
             <Route path="/locations" component={Locations} />
             <Route path="/organizations" component={Organizations} />
+            <Route path="/not-found" component={NotFound} />
+            <Redirect to="/not-found" />
           </Switch>
         </main>
       </React.Fragment>

@@ -28,8 +28,13 @@ class LocationForm extends Form {
       return;
     }
 
-    const location = await getLocationById(locationId);
-    this.setState({ data: this.mapToViewModel(location.data) });
+    try {
+      const { data: location } = await getLocationById(locationId);
+      this.setState({ data: this.mapToViewModel(location) });
+    } catch (e) {
+      if (e.response && e.response.status === 404)
+        return this.props.history.replace("/not-found");
+    }
   }
 
   mapToViewModel(location) {
