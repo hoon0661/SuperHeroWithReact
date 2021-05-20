@@ -10,13 +10,13 @@ class LocationsTable extends Component {
     { path: "longitude", label: "Longitude" },
     { path: "description", label: "Description" },
     {
-      key: "detail",
+      key: "edit",
       content: (location) => (
         <Link
           to={`/locations/${location.id}`}
           className="btn btn-success btn-sm"
         >
-          Detail
+          Edit
         </Link>
       ),
     },

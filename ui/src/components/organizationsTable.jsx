@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import Table from "./common/table";
 
 class OrganizationsTable extends Component {
@@ -8,6 +9,17 @@ class OrganizationsTable extends Component {
     { path: "city", label: "City" },
     { path: "email", label: "Email" },
     { path: "description", label: "Description" },
+    {
+      key: "edit",
+      content: (organization) => (
+        <Link
+          to={`/organizations/${organization.id}`}
+          className="btn btn-success btn-sm"
+        >
+          Edit
+        </Link>
+      ),
+    },
     {
       key: "delete",
       content: (organization) => (

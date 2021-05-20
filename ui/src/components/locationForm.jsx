@@ -23,23 +23,26 @@ class LocationForm extends Form {
   };
 
   async componentDidMount() {
-    const locationId = this.props.match.params.id;
-    if (locationId === "new") {
-      return;
-    }
+    await this.populateLocation();
+  }
 
+  async populateLocation() {
     try {
+      const locationId = this.props.match.params.id;
+      if (locationId === "new") return;
+
       const { data: location } = await getLocationById(locationId);
       this.setState({ data: this.mapToViewModel(location) });
-    } catch (e) {
-      if (e.response && e.response.status === 404)
-        return this.props.history.replace("/not-found");
+    } catch (ex) {
+      if (ex.response && ex.response.status === 404) {
+        this.props.history.replace("/not-found");
+      }
     }
   }
 
   mapToViewModel(location) {
     return {
-      id: location.id,
+      id: location.id.toString(),
       city: location.city,
       description: location.description,
       latitude: location.latitude,
@@ -48,9 +51,11 @@ class LocationForm extends Form {
   }
 
   doSubmit = async () => {
+    console.log("hello");
     await saveLocation(this.state.data);
     this.props.history.push("/locations");
   };
+
   render() {
     return (
       <div>

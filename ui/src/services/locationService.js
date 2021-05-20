@@ -18,7 +18,6 @@ export function deleteLocation(locationId) {
 export function saveLocation(location) {
   if (location.id) {
     const body = { ...location };
-    delete body.id;
     return http.put(apiEndPoint + "/" + location.id, body);
   }
 
